@@ -1,9 +1,6 @@
 package cx.leetcode.linkedlist;
 
-/**
- * 和160题是一样的，这是剑指offer023
- */
-public class Solution023 {
+public class Solution160 {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode p1 = headA, p2 = headB;
         while (p1 != p2) {
