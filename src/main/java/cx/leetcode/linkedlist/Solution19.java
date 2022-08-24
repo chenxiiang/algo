@@ -1,7 +1,5 @@
 package cx.leetcode.linkedlist;
 
-import com.sun.java.swing.action.NextAction;
-
 public class Solution19 {
     public ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode dummy = new ListNode(-1);
