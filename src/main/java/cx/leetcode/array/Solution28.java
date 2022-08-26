@@ -1,6 +1,6 @@
 package cx.leetcode.array;
 
-public class Solution28 {
+public class Solution283 {
     public void moveZeroes(int[] nums) {
         int len = removeElement(nums, 0);
         for (; len < nums.length; len++) {
