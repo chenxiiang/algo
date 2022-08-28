@@ -1,7 +1,5 @@
 package cx.leetcode.linkedlist;
 
-import com.sun.java.swing.action.NextAction;
-
 public class Solution92 {
     public ListNode reverseBetween(ListNode head, int left, int right) {
         if (left == 1) {
