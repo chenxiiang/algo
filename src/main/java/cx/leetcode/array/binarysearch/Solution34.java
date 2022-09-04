@@ -1,4 +1,4 @@
-package cx.leetcode.binarysearch;
+package cx.leetcode.array.binarysearch;
 
 public class Solution34 {
     public int[] searchRange(int[] nums, int target) {

@@ -1,20 +1,27 @@
-package cx.leetcode.slidewindow;
+/*
+ * Copyright (c) Huawei Technologies Co., Ltd. 2022-2022. All rights reserved.
+ */
 
-import java.util.ArrayList;
+package cx.leetcode.array.slidewindow;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Offer015 {
-    public List<Integer> findAnagrams(String s, String p) {
+/**
+ * 功能描述
+ *
+ * @author c00575945
+ * @since 2022-09-01
+ */
+public class Offer014 {
+    public boolean checkInclusion(String s1, String s2) {
         Map<Character, Integer> window = new HashMap<>(), need = new HashMap<>();
-        List<Integer> res = new ArrayList<>();
         int left = 0, right = 0, valid = 0;
-        for (char c : p.toCharArray()) {
+        for (char c : s1.toCharArray()) {
             need.put(c, need.getOrDefault(c, 0) + 1);
         }
-        while (right < s.length()) {
-            Character c = s.charAt(right);
+        while (right < s2.length()) {
+            Character c = s2.charAt(right);
             right++;
             if (need.containsKey(c)) {
                 window.put(c, window.getOrDefault(c, 0) + 1);
@@ -22,20 +29,20 @@ public class Offer015 {
                     valid++;
                 }
             }
-            while (right - left >= p.length()) {
+            if (right - left >= s1.length()) {
                 if (valid == need.size()) {
-                    res.add(left);
+                    return true;
                 }
-                Character d = s.charAt(left);
+                Character d = s2.charAt(left);
                 left++;
                 if (need.containsKey(d)) {
-                    if (window.get(d).equals(need.get(d))) {
+                    if (need.get(d).equals(window.get(d))) {
                         valid--;
                     }
                     window.put(d, window.get(d) - 1);
                 }
             }
         }
-        return res;
+        return false;
     }
 }

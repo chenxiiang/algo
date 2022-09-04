@@ -1,9 +1,9 @@
-package cx.leetcode.slidewindow;
+package cx.leetcode.array.slidewindow;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Solution76 {
+public class Offer017 {
     public String minWindow(String s, String t) {
         Map<Character, Integer> window = new HashMap<>(), need = new HashMap<>();
         int left = 0, right = 0, valid = 0;
@@ -16,10 +16,11 @@ public class Solution76 {
             right++;
             if (need.containsKey(c)) {
                 window.put(c, window.getOrDefault(c, 0) + 1);
-                if (need.get(c).equals(window.get(c))) {
+                if (window.get(c).equals(need.get(c))) {
                     valid++;
                 }
             }
+
             while (valid == need.size()) {
                 if (right - left < len) {
                     start = left;

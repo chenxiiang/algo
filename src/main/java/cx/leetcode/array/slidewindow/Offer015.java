@@ -1,20 +1,20 @@
-package cx.leetcode.slidewindow;
+package cx.leetcode.array.slidewindow;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Solution438 {
+public class Offer015 {
     public List<Integer> findAnagrams(String s, String p) {
-        List<Integer> res = new ArrayList<>();
         Map<Character, Integer> window = new HashMap<>(), need = new HashMap<>();
+        List<Integer> res = new ArrayList<>();
+        int left = 0, right = 0, valid = 0;
         for (char c : p.toCharArray()) {
             need.put(c, need.getOrDefault(c, 0) + 1);
         }
-        int left = 0, right = 0, valid = 0;
         while (right < s.length()) {
-            char c = s.charAt(right);
+            Character c = s.charAt(right);
             right++;
             if (need.containsKey(c)) {
                 window.put(c, window.getOrDefault(c, 0) + 1);
@@ -22,11 +22,11 @@ public class Solution438 {
                     valid++;
                 }
             }
-            if (right - left >= p.length()) {
+            while (right - left >= p.length()) {
                 if (valid == need.size()) {
                     res.add(left);
                 }
-                char d = s.charAt(left);
+                Character d = s.charAt(left);
                 left++;
                 if (need.containsKey(d)) {
                     if (window.get(d).equals(need.get(d))) {

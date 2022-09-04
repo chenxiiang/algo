@@ -1,12 +1,13 @@
-package cx.leetcode.slidewindow;
+package cx.leetcode.array.slidewindow;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Offer016 {
+public class Offer48 {
     public int lengthOfLongestSubstring(String s) {
         Map<Character, Integer> window = new HashMap<>();
-        int left = 0, right = 0, res = 0;
+        int left = 0, right = 0;
+        int res = 0;
         while (right < s.length()) {
             Character c = s.charAt(right);
             right++;
