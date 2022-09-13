@@ -1,4 +1,4 @@
-package cx.leetcode.binarytree.sort;
+package cx.leetcode.binarytree.mergesort;
 
 import java.util.ArrayList;
 import java.util.List;
