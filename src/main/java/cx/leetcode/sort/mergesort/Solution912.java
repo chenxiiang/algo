@@ -1,4 +1,4 @@
-package cx.leetcode.sort;
+package cx.leetcode.sort.mergesort;
 
 public class Solution912 {
     private static int[] temp;
