@@ -8,7 +8,7 @@ public class Solution583 {
      * 偷懒的方法就是直接求最长公共子序列的长度lcs，然后len1-lcs+len2-lcs，就是所需的最小删除次数
      * <p>
      * 正常的方法就是继续dp，两种情况
-     * 1、s1[i]==s2[j]：f[i][j] = f[i - 1][j - 1]f[i][j]=f[i−1][j−1]，代表可以不用必然删掉 s1[i]s1[i] 和 s2[j]s2[j] 形成相同字符串；
+     * 1、s1[i]==s2[j]：f[i][j] = f[i - 1][j - 1]，代表可以不用必然删掉 s1[i] 和 s2[j] 形成相同字符串；
      * 2、s1[i]!=s2[j]：f[i][j] = min(f[i - 1][j], f[i][j - 1])+1，代表至少一个删除 s1[i] 和 s2[j] 中的其中一个。
      */
     public int minDistance(String word1, String word2) {
