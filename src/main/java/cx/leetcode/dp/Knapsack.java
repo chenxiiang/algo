@@ -3,6 +3,7 @@ package cx.leetcode.dp;
 public class Knapsack {
     public int knapsack(int bagSize, int[] weight, int[] val) {
         int n = weight.length;
+        //可以把dp改为一维，然后循环的时候bagsize倒序遍历，具体写法参考416题
         int[][] dp = new int[n + 1][bagSize + 1];
         //说明base case，背包容量为0时所有物品的价值都只能是0
         for (int i = 0; i < n; i++) {
