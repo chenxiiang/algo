@@ -36,6 +36,20 @@ public class Solution121 {
         }
         return dp[n - 1][0];
     }
+    
+    //空间复杂度优化,避免了大量的数组赋值，实际运行时间也提升很多
+    public int maxProfit1(int[] prices) {
+        int n = prices.length;
+        // base case: dp[-1][0] = 0, dp[-1][1] = -infinity
+        int dp_0 = 0, dp_1 = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            // dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+            dp_0 = Math.max(dp_0, dp_1 + prices[i]);
+            // dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
+            dp_1 = Math.max(dp_1, -prices[i]);
+        }
+        return dp_0;
+    }
 
     /*
     只针对这一题，不用股票问题的框架
