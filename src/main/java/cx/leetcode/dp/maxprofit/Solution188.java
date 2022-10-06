@@ -38,4 +38,50 @@ public class Solution188 {
 //dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
 //dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
 
+    public int maxProfit(int maxK, int[] prices) {
+//传入的k可能会非常大，dp数组太大可能会内存超出限制
+//一次交易由买入和卖出构成，至少需要两天，所以有效的k限制应该不超过n/2，如果超出，就没有约束作用，相当于k没有限制
+        int n = prices.length;
+        if (n == 0) {
+            return 0;
+        }
+        if (maxK > n / 2) {
+            return maxProfit_k_inf(prices);
+        }
+        // base case：
+        // dp[-1][...][0] = dp[...][0][0] = 0
+        // dp[-1][...][1] = dp[...][0][1] = -infinity
+        int[][][] dp = new int[n][maxK + 1][2];
+        //base case:k=0
+        for (int i = 0; i < n; i++) {
+            dp[i][0][1] = Integer.MIN_VALUE;
+            dp[i][0][0] = 0;
+        }
+        for (int i = 0; i < n; i++) {
+            for (int k = maxK; k >= 1; k--) {
+                if (i - 1 == -1) {
+                    dp[i][k][0] = 0;
+                    dp[i][k][1] = -prices[i];
+                    continue;
+                }
+                dp[i][k][0] = Math.max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i]);
+                //由未持有变为持有，做了一次交易，最大交易次数限制要-1
+                dp[i][k][1] = Math.max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
+            }
+        }
+        return dp[n - 1][maxK][0];
+    }
+
+    public int maxProfit_k_inf(int[] prices) {
+        int n = prices.length;
+        int dp_0 = 0, dp_1 = Integer.MIN_VALUE;
+        for (int i = 0; i < n; i++) {
+            //这里跟121不一样的是k只有1次时买股票的时候初始收益只可能0
+            //但是k为无穷大的时候，就要把上一次交易时的利润计算进来
+            int temp = dp_0;
+            dp_0 = Math.max(dp_0, dp_1 + prices[i]);
+            dp_1 = Math.max(dp_1, temp - prices[i]);
+        }
+        return dp_0;
+    }
 }

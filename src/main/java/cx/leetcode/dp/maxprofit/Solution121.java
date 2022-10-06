@@ -55,7 +55,7 @@ public class Solution121 {
     只针对这一题，不用股票问题的框架
     一次交易要利润最大化，也就是求最值，在最低点买入，在最高点卖出
      */
-    public int maxProfit1(int[] prices) {
+    public int maxProfit2(int[] prices) {
         int minPrice = Integer.MAX_VALUE;
         int maxProfit = 0;
         for (int price : prices) {
