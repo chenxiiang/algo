@@ -1,4 +1,4 @@
-package cx.leetcode.algo.backtrack;
+package cx.leetcode.backtrack;
 
 import java.util.ArrayList;
 import java.util.Arrays;
