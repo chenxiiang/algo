@@ -3,7 +3,7 @@ package cx.leetcode.bfs;
 import java.util.*;
 
 public class Solution752 {
-    //一次拨动可能存在8中情况，每一位可以向上或向下，一共4位
+    //一次拨动可能存在8种情况，每一位可以向上或向下，一共4位
     public int openLock(String[] deadends, String target) {
         //记录已经遍历过的，死亡数字也可以看做是遍历过的，不能加入结果的
         Set<String> visited = new HashSet<>(Arrays.asList(deadends));
