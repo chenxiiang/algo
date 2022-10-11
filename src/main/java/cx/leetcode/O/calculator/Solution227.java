@@ -3,6 +3,9 @@ package cx.leetcode.O.calculator;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
+/**
+ * 就是在224的基础上没有括号，直接把括号的提交上去也能过
+ */
 public class Solution227 {
     public int calculate(String s) {
         Deque<Integer> stack = new ArrayDeque<>();
