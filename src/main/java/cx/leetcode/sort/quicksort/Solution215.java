@@ -29,8 +29,8 @@ public class Solution215 {
         // [lo, i) <= pivot；(j, hi] > pivot
         // 之后都要正确维护这个边界区间的定义
         int i = low + 1, j = high;
-        // 当 i > j 时结束循环，以保证区间 [lo, hi] 都被覆盖
-        while (i <= j) {
+        // 有break的条件，这里直接true即可
+        while (true) {
             while (i < high && nums[i] < pivot) {
                 i++;
                 // 此 while 结束时恰好 nums[i] >= pivot
