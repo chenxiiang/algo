@@ -14,7 +14,7 @@ public class Solution31 {
             j--;
         }
         if (i >= 0) {//不是最后一个排列
-            //再找后面比nums[i]大的数中最小的那个，相等也包含
+            //再找后面比nums[i]大的数中最小的那个，不包含相等的，所以跳过
             while (nums[i] >= nums[k]) {
                 k--;
             }
