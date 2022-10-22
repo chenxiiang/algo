@@ -8,6 +8,7 @@ public class Solution128 {
     // dp[0]=1
     // if(dp[i]==dp[i-1]+1);
     // dp[i]=dp[i-1]+1
+    // 动态规划的时候还是要满足一点就是能在O(1)的时间长度内获取前面的元素，必须使用数组或者哈希表
     public int longestConsecutive(int[] nums) {
         Set<Integer> numSet = new HashSet<>();
         for (int num : nums) {
