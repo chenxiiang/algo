@@ -15,6 +15,7 @@ public class Solution105 {
     }
 
     private TreeNode build(int[] preorder, int preStart, int preEnd, int[] inorder, int inStart, int inEnd) {
+        //这里用两个数组的索引判断都可
         if (preStart > preEnd) {
             return null;
         }
