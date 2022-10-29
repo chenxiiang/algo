@@ -1,0 +1,44 @@
+package cx.leetcode.bytedance;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution54 {
+    /**
+     * 顺时针打印矩阵
+     */
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> res = new ArrayList<>();
+        int row = matrix.length, col = matrix[0].length;
+        int left = 0, right = col - 1, upper = 0, lower = row - 1;
+        while (res.size() < row * col) {
+            if (upper <= lower) {
+                for (int i = left; i <= right; i++) {
+                    res.add(matrix[upper][i]);
+                }
+                upper++;
+            }
+
+            if (left <= right) {
+                for (int i = upper; i <= lower; i++) {
+                    res.add(matrix[i][right]);
+                }
+                right--;
+            }
+
+            if (lower >= upper) {
+                for (int i = right; i >= left; i--) {
+                    res.add(matrix[lower][i]);
+                }
+                lower--;
+            }
+            if (left <= right) {
+                for (int i = lower; i >= upper; i--) {
+                    res.add(matrix[i][left]);
+                }
+                left++;
+            }
+        }
+        return res;
+    }
+}
