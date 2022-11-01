@@ -1,5 +1,9 @@
 package cx.leetcode.bytedance;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 public class Solution257 {
     List<String> res = new ArrayList<>();
 
