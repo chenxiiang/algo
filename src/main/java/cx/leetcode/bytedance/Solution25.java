@@ -34,21 +34,4 @@ public class Solution25 {
         //反转的区间是[a,b)
         return prev;
     }
-
-    class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 }
