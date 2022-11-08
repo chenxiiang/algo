@@ -1,6 +1,7 @@
 package cx.leetcode.bytedance;
 
 public class Solution200 {
+    //重点
     public int numIslands(char[][] grid) {
         int res = 0;
         int row = grid.length, col = grid[0].length;
