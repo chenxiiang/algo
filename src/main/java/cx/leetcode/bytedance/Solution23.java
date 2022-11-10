@@ -3,7 +3,6 @@ package cx.leetcode.bytedance;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Queue;
 
 public class Solution23 {
     public ListNode mergeKLists(ListNode[] lists) {
