@@ -123,3 +123,68 @@ super部分包括它的父类的实例变量，以及一个指针指向父类的
 如果在该类型（子类）中找到与常量中的描述符和简单名称都相同的方法，进行权限访问，通过则返回这个方法的引用；如果权限访问不通过，则返回java.lang.IllegalAccessError错误。
 如果没有找到签名相同的方法，对该类型的父类进行第二步的搜索和验证；
 如果没有找到，则返回java.lang.AbstractMethodError.
+
+Java 集合
+说说 List,Set,Map 三者的区别？
+
+💡 提示：可以从这些数据结构中的元素是否有序、是否可以重复、存储的元素类型（比如 Map 存储的就是键值对）等方面来回答。
+
+List,Set,Map 在 Java 中分别由哪些对应的实现类？底层的数据结构？
+
+💡 提示：拿 List 来举例， List 的常见实现类以及它们的数据结构 ：
+
+●ArrayList： Object[]数组
+●Vector：Object[]数组
+●LinkedList： 双向链表(JDK1.6 之前为循环链表，JDK1.7 取消了循环)
+
+有哪些集合是线程不安全的？怎么解决呢？
+
+💡 提示：这块比较常问的是 Arraylist 和 Vector（除去线程安全的方面，还有vector扩容时扩展1倍，ArrayList扩展0.5倍） 、HashMap 和 ConcurrentHashMap（高频问题，重要） 。被问到 Vector 的时候， 你紧接着可能会被问到 Arraylist 和 Vector 的区别。被问到 ConcurrentHashMap 的时候，你紧接着就可能会被问到 ConcurrentHashMap 相关的问题比如 ConcurrentHashMap 是如何保证线程安全的。
+
+hashtable,对于null值会抛出异常,而对于null键,则会调用null.hashCode(),而导致空指针异常,而concurrenthashmap则对于null键值对,直接抛出空异常,这也就是为什么他们存入null键值对抛出异常的原因.hashmap在对null键求hash时直接返回0，value也可以为0，但是只能有一个key为0.
+
+为什么不支持null？
+ConcurrentHashmap和Hashtable都是线程安全用来做支持并发的，这样会有一个问题，当你通过get(k)获取对应的value时，如果获取到的是null时，你无法判断，它是put（k,v）的时候value为null，还是这个key从来没有做过映射。而HashMap是非并发的，可以通过contains(key)来做这个判断。而支持并发的Map在调用m.contains（key）和m.get(key),m很可能已经不同了
+
+HashMap 查询，删除的时间复杂度
+💡 提示：理想状态下是O（1），因为对内存来说访问任何地址的时间是一样的，但是要达到理想状态需要很大的空间，所以要在空间和时间进行取舍。
+●没有哈希冲突的情况：如果没有碰撞就是理想状态
+●转链表的情况：hash的时间是1，最坏情况所有元素在同一个链表，就是O(n)
+●链表转红黑树的情况：O(logn)
+
+HashMap 的底层实现
+💡 提示：
+●JDK1.8 之前 ： 数组和链表
+●JDK1.8 之后 ： 多了红黑树
+
+HashMap 的长度为什么是 2 的幂次方
+💡 提示：提高运算效率。
+前提：为什么要取模？哈希值的范围空间有40亿，不能直接用，要经过取模才能得到数组下标。
+
+答案可以答三点：
+1、提高运算效率，根据hashcode求存储位置，就是hashcode%length，特殊情况是如果length是2的n次方，这个取模运算等价于位运算hashcode&(length-1)，是比除法运算快的
+2、保证低位所有的位置都可用，2的n次方一定是偶数，减1后的二进制末尾一定是1，这样无论hashcode末尾是0还是1，都可以把内存中末尾是1或0的位置都存储元素，如果不保证2的幂，当长度为奇数时，减1的二进制末尾一定是0，此时内存地址末尾为1的位置永远不会有元素放入，造成空间浪费
+3、解决负数问题，hashcode结果是int类型，取值范围是-2^31 ~ 2^31 – 1，对负数取模是比较麻烦的，当使用二进制的位运算时，无论hashcode是正数还是负数，反正length-1一定是正数，那么它的首位一定是0，与运算后结果的首位也一定是0，得到的结果一定是正数。
+
+
+比较 HashSet、LinkedHashSet 和 TreeSet 三者的异同
+💡 提示：
+●HashSet、LinkedHashSet 和 TreeSet 都是 Set 接口的实现类，都能保证元素唯一，并且都不是线程安全的。
+●HashSet（基于hashmap的哈希表）、LinkedHashSet（基于linkedhashmap实现的链表和哈希表，linkedhashmap是一个将所有entry节点加入一个双向链表的hashmap） 和 TreeSet（红黑树） 的主要区别在于底层数据结构不同（底层数据结构不同又导致这三者的应用场景不同）。
+
+HashMap 和 Hashtable 的区别？ 多线程、效率、null、初始容量和扩容、底层结构
+HashMap 和 HashSet 区别？
+HashMap 和 TreeMap 区别？
+
+ConcurrentHashMap 和 Hashtable 的区别？
+💡 提示：
+●底层数据结构
+●实现线程安全的方式的区别
+
+ConcurrentHashMap 线程安全的具体实现方式/底层具体实现
+💡 提示：
+●JDK 1.7 ：Segment 分段+reentrantlock，每个segment都继承reentrantlock
+●JDK 1.8 ： CAS 乐观锁和 synchronized
+Cas体现在当数组中当前位置为null，也就是指定位置还没有插入元素时，通过cas来把新node写入数组中对应位置，如果在put的过程中别的线程已经插入了数据导致位置又不为空，则cas失败，返回false，继续寻找位置，整个put的过程不加锁，利用table是volatile的特性。当指定位置不为空时，通过加同步锁来添加节点。而在1.7中，定位到segment后就会把整个segment加锁，即使需要插入的位置暂时是空的，也要加锁。（注意，1.7中如果指定的segment还没有初始化，通过cas来初始化）
+注
+1.8的锁粒度更小，因为1.7中，segment是根据hashcode的高位来计算的，当segment相同时把整个segment都锁住了，但是它们的hashcode并不一定一样，但是在1.8中取消了segment概念，直接就是node数组，其中的元素就是链表的头结点，锁的时候只锁相同hashcode的头结点，并发度是比1.7的实现更高的。
