@@ -1,5 +1,7 @@
 package cx.leetcode.sort.quicksort;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Random;
 
 public class Solution912 {
@@ -82,5 +84,28 @@ public class Solution912 {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
+    }
+
+    //快排的非递归
+    public void quickSort(int[] array) {
+        Deque<Integer> s = new ArrayDeque<>();
+        s.push(0);
+        s.push(array.length - 1);
+        while (!s.isEmpty()) {
+            int right = s.pop();
+            int left = s.pop();
+            if (right <= left) {
+                continue;
+            }
+            int i = partition(array, left, right);
+            if (left < i - 1) {
+                s.push(left);
+                s.push(i - 1);
+            }
+            if (right > i + 1) {
+                s.push(i + 1);
+                s.push(right);
+            }
+        }
     }
 }
